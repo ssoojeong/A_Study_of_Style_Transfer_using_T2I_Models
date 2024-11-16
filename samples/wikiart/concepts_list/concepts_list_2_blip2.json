@@ -1,0 +1,14 @@
+[
+    {
+        "instance_prompt": "A painting of a woman standing in front of a door in the style of <new1>",
+        "class_prompt": null,
+        "instance_data_dir": "/userHome/userhome1/sojeong/style/data/wikiart/0820_raw_multi/new1",
+        "class_data_dir": null
+    },
+    {
+        "instance_prompt": "A painting of books stacked on a balance in the style of <new2>",
+        "class_prompt": null,
+        "instance_data_dir": "/userHome/userhome1/sojeong/style/data/wikiart/0820_raw_multi/new2",
+        "class_data_dir": null
+    }
+]

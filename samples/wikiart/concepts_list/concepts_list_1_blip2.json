@@ -1,0 +1,8 @@
+[
+    {
+        "instance_prompt": "A painting of a woman standing in front of a door in the style of <new1>",
+        "class_prompt": null,
+        "instance_data_dir": "./data/wikiart",
+        "class_data_dir": null
+    }
+]

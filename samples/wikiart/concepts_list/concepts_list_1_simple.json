@@ -1,0 +1,8 @@
+[
+    {
+        "instance_prompt": "A painting in the style of <new1>",
+        "class_prompt": null,
+        "instance_data_dir": "/userHome/userhome1/sojeong/style/data/wikiart/0820_raw_multi/new1",
+        "class_data_dir": null
+    }
+]
