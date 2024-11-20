@@ -2,6 +2,10 @@
 
 ## &#x1F4E2; Project Overview: 2406~2409
 
+### Overview Schema & In-depth Results of Dreambooth (2023 CVPR)
+![overview schema](figure/overview.jpg)
+
+
 ### 주요 기능
 - Diffusion Inversion-based (Image-to-Text) 방법 기반 Style Transfer 연구
 - 다양한 평가 지표(e.g., FID, CLIP-I, CLIP-T, Gram loss) 활용
