@@ -1,4 +1,4 @@
-# A_Study_of_Style_Transfer_using_T2I_Models
+# A Study of Style Transfer using T2I Models
 
 ## &#x1F4E2; Project Overview: 2406~2409
 
