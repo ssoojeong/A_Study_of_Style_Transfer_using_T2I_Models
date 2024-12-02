@@ -1,10 +1,19 @@
 import argparse
 import os
-from inference.textual_inversion import *
-from inference.dreambooth import *
-from inference.custom_diffusion import *
+# from inference.textual_inversion import *
+# from inference.dreambooth import *
+# from inference.custom_diffusion import *
+
+original_path = os.getcwd()
+os.chdir(os.path.join(original_path, 'inference'))
 
 def run_custom_diffusion(args):
+    args.model_dir = os.path.join(original_path, args.model_dir)
+    args.save_dir = os.path.join(original_path, args.save_dir, args.model)
+    args.prompt_dir = os.path.join(original_path, args.prompt_dir)
+    
+    os.makedirs(args.save_dir, exist_ok=True)
+    
     os.system(f"""
     python custom_diffusion.py \
       --model_dir "{args.model_dir}" \
@@ -13,6 +22,12 @@ def run_custom_diffusion(args):
     """)
 
 def run_dreambooth(args):
+    args.model_dir = os.path.join(original_path, args.model_dir)
+    args.save_dir = os.path.join(original_path, args.save_dir, args.model)
+    args.prompt_dir = os.path.join(original_path, args.prompt_dir)
+    
+    os.makedirs(args.save_dir, exist_ok=True)
+    
     os.system(f"""
     python dreambooth.py \
       --model_dir "{args.model_dir}" \
@@ -22,6 +37,12 @@ def run_dreambooth(args):
     """)
 
 def run_textual_inversion(args):
+    args.model_dir = os.path.join(original_path, args.model_dir)
+    args.save_dir = os.path.join(original_path, args.save_dir, args.model)
+    args.prompt_dir = os.path.join(original_path, args.prompt_dir)
+    
+    os.makedirs(args.save_dir, exist_ok=True)
+    
     os.system(f"""
     python textual_inversion.py \
       --model_dir "{args.model_dir}" \
@@ -52,3 +73,5 @@ if __name__ == "__main__":
         run_textual_inversion(args)
     else:
         print("이 중에서 선택: 'custom_diffusion', 'dreambooth', or 'textual_inversion'.")
+    
+    os.chdir(original_path)

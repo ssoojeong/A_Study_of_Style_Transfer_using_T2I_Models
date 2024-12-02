@@ -39,6 +39,8 @@
 conda create -n diffusion python=3.9
 conda activate diffusion
 
+cd ./A_Study_of_Style_Transfer_using_T2I_Models
+
 pip install -r requirements.txt
 ```
 > **Note**: GPU 사용 가능 환경에서 실행 권장
@@ -59,8 +61,8 @@ python train.py \
 python inference.py \
     --model "{모델명}" \
     --model_dir "./save/model_ckpt/{모델명}" \
-    --save_dir "./save_dir" \
-    --prompt_dir "./prompt_dir"
+    --save_dir "./save_dir" \ 
+    --prompt_dir "./data/prompts" #prompt_dir
 ```
 > **모델명**: textual_inversion, dreambooth, custom_diffusion
 

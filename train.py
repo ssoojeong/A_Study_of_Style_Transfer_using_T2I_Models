@@ -1,16 +1,25 @@
 import argparse
 import os
-from models.textual_inversion import *
-from models.dreambooth import *
-from models.custom_diffusion import *
+
+original_path = os.getcwd()
 
 def run_textual_inversion(args):
+    os.chdir(os.path.join(original_path, f'models/{args.model}'))
+    args.instance_dir = os.path.join(original_path, args.instance_dir)
+    args.output_dir = os.path.join(original_path, args.output_dir)
+    
+    #initial prompts
+    if 'peanuts' in args.instance_dir:
+        initializer_token = 'sketch'
+    else:
+        initializer_token = 'painting'
+    
     os.system(f"""
     accelerate launch textual_inversion.py \
       --pretrained_model_name_or_path={args.model_name} \
       --train_data_dir={args.instance_dir} \
       --learnable_property="style" \
-      --placeholder_token="<snoopy-sketch>" --initializer_token="sketch" \
+      --placeholder_token="<new1>" --initializer_token="{initializer_token}" \
       --resolution=512 \
       --train_batch_size=1 \
       --gradient_accumulation_steps=4 \
@@ -20,8 +29,16 @@ def run_textual_inversion(args):
       --lr_warmup_steps=0 \
       --output_dir={args.output_dir}
     """)
+    
+    os.chdir(original_path)
+    
 
 def run_dreambooth(args):
+    os.chdir(os.path.join(original_path, f'models/{args.model}'))
+    args.instance_dir = os.path.join(original_path, args.instance_dir)
+    args.output_dir = os.path.join(original_path, args.output_dir)
+    args.class_dir = os.path.join(original_path, args.class_dir)
+    
     os.system(f"""
     accelerate launch train_dreambooth.py \
       --pretrained_model_name_or_path={args.model_name} \
@@ -29,7 +46,7 @@ def run_dreambooth(args):
       --class_data_dir={args.class_dir} \
       --output_dir={args.output_dir} \
       --with_prior_preservation --prior_loss_weight=1.0 \
-      --instance_prompt="A painting in the style of sks art" \
+      --instance_prompt="A painting in the style of <new1> art" \
       --class_prompt="art" \
       --resolution=512 \
       --train_batch_size=1 \
@@ -44,6 +61,11 @@ def run_dreambooth(args):
     """)
 
 def run_custom_diffusion(args):
+    os.chdir(os.path.join(original_path, f'models/{args.model}'))
+    args.instance_dir = os.path.join(original_path, args.instance_dir)
+    args.output_dir = os.path.join(original_path, args.output_dir)
+    args.class_dir = os.path.join(original_path, args.class_dir)
+    
     os.system(f"""
     accelerate launch train_custom_diffusion.py \
       --pretrained_model_name_or_path={args.model_name} \
@@ -70,7 +92,7 @@ if __name__ == "__main__":
     parser.add_argument("--model", type=str, required=True, choices=["textual_inversion", "dreambooth", "custom_diffusion"])
     parser.add_argument("--model_name", type=str, default="CompVis/stable-diffusion-v1-4")
     parser.add_argument("--class_dir", type=str, default="./data/sketch/images")
-    parser.add_argument("--instance_dir", type=str, default="./data/peanuts/image")
+    parser.add_argument("--instance_dir", type=str, default="./data/peanuts")
     parser.add_argument("--output_dir", type=str, default="./save/images")
     parser.add_argument("--loss_path", type=str, default="./save/loss")
 

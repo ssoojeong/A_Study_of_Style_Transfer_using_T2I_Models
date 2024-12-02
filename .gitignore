@@ -134,3 +134,5 @@ cards/
 
 vggloss.ipynb
 
+*.ipynb
+save/
