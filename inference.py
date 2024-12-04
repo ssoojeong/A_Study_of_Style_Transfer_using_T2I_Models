@@ -50,6 +50,11 @@ def run_textual_inversion(args):
       --prompt_dir "{args.prompt_dir}"
     """)
 
+def none_or_int(value):
+    if value == "None":
+        return None
+    return int(value)
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, required=True,
@@ -57,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument("--model_dir", type=str, required=True)
     parser.add_argument("--save_dir", type=str, required=True)
     parser.add_argument("--prompt_dir", type=str, required=True)
-    parser.add_argument("--spe_step", type=int, default=None)
+    parser.add_argument("--spe_step", type=int, default=3000)
 
     args = parser.parse_args()
 
