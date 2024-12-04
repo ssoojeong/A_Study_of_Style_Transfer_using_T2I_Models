@@ -8,7 +8,7 @@ original_path = os.getcwd()
 os.chdir(os.path.join(original_path, 'inference'))
 
 def run_custom_diffusion(args):
-    args.model_dir = os.path.join(original_path, args.model_dir)
+    args.model_dir = os.path.join(original_path, args.model_dir, args.model)
     args.save_dir = os.path.join(original_path, args.save_dir, args.model)
     args.prompt_dir = os.path.join(original_path, args.prompt_dir)
     
@@ -22,7 +22,7 @@ def run_custom_diffusion(args):
     """)
 
 def run_dreambooth(args):
-    args.model_dir = os.path.join(original_path, args.model_dir)
+    args.model_dir = os.path.join(original_path, args.model_dir, args.model)
     args.save_dir = os.path.join(original_path, args.save_dir, args.model)
     args.prompt_dir = os.path.join(original_path, args.prompt_dir)
     
@@ -37,7 +37,7 @@ def run_dreambooth(args):
     """)
 
 def run_textual_inversion(args):
-    args.model_dir = os.path.join(original_path, args.model_dir)
+    args.model_dir = os.path.join(original_path, args.model_dir, args.model)
     args.save_dir = os.path.join(original_path, args.save_dir, args.model)
     args.prompt_dir = os.path.join(original_path, args.prompt_dir)
     

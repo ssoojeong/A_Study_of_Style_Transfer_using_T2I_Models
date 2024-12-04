@@ -6,7 +6,7 @@ original_path = os.getcwd()
 def run_textual_inversion(args):
     os.chdir(os.path.join(original_path, f'models/{args.model}'))
     args.instance_dir = os.path.join(original_path, args.instance_dir)
-    args.output_dir = os.path.join(original_path, args.output_dir)
+    args.output_dir = os.path.join(original_path, args.output_dir, args.model)
     
     #initial prompts
     if 'peanuts' in args.instance_dir:
@@ -36,7 +36,7 @@ def run_textual_inversion(args):
 def run_dreambooth(args):
     os.chdir(os.path.join(original_path, f'models/{args.model}'))
     args.instance_dir = os.path.join(original_path, args.instance_dir)
-    args.output_dir = os.path.join(original_path, args.output_dir)
+    args.output_dir = os.path.join(original_path, args.output_dir, args.model)
     args.class_dir = os.path.join(original_path, args.class_dir)
     
     os.system(f"""
@@ -47,7 +47,7 @@ def run_dreambooth(args):
       --output_dir={args.output_dir} \
       --with_prior_preservation --prior_loss_weight=1.0 \
       --instance_prompt="A painting in the style of <new1>" \
-      --class_prompt="art" \
+      --class_prompt="painting" \
       --resolution=512 \
       --train_batch_size=1 \
       --gradient_accumulation_steps=1 \
@@ -62,7 +62,7 @@ def run_dreambooth(args):
 def run_custom_diffusion(args):
     os.chdir(os.path.join(original_path, f'models/{args.model}'))
     args.instance_dir = os.path.join(original_path, args.instance_dir)
-    args.output_dir = os.path.join(original_path, args.output_dir)
+    args.output_dir = os.path.join(original_path, args.output_dir, args.model)
     args.class_dir = os.path.join(original_path, args.class_dir)
     
     os.system(f"""
@@ -71,17 +71,18 @@ def run_custom_diffusion(args):
       --instance_data_dir={args.instance_dir} \
       --output_dir={args.output_dir} \
       --class_data_dir={args.class_dir} \
-      --class_prompt="art" --num_class_images=200 \
+      --class_prompt="painting" --num_class_images=200 \
       --real_prior --prior_loss_weight=1.0 \
       --instance_prompt="A painting in the style of <new1>" \
       --resolution=512 \
       --train_batch_size=1 \
       --learning_rate=1e-5 \
       --lr_warmup_steps=0 \
-      --max_train_steps=2 \
+      --max_train_steps=3000 \
       --scale_lr --hflip --noaug \
-      --modifier_token "<new1>" \
-      --num_train_epochs=100
+      --modifier_token="<new1>" \
+      --num_train_epochs=100 \
+      --no_safe_serialization
     """)
 
 if __name__ == "__main__":

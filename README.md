@@ -50,8 +50,8 @@ pip install -r requirements.txt
 ```bash
 python train.py \
     --model "{모델명}" \
-    --instance_dir "./data/peanuts" \ #'./data/wikiart'
-    --output_dir "./save/model_ckpt/{모델명}"
+    --instance_dir "data/peanuts" \ #'data/wikiart'
+    --output_dir "save/model_ckpt"
 ```
 > **모델명**: > textual_inversion, dreambooth, custom_diffusion
 
@@ -60,9 +60,9 @@ python train.py \
 ```bash
 python inference.py \
     --model "{모델명}" \
-    --model_dir "./save/model_ckpt/{모델명}" \
-    --save_dir "./save_dir" \ 
-    --prompt_dir "./data/prompts" #prompt_dir
+    --model_dir "save/model_ckpt" \
+    --save_dir "save/images" \ 
+    --prompt_dir "data/prompts" #prompt_dir
 ```
 > **모델명**: textual_inversion, dreambooth, custom_diffusion
 
